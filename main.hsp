@@ -28,6 +28,9 @@
 		delmod content(len)
 		return res
 
-	#modcfunc local get_length
+	#modcfunc get_length
 		return len
+
+	#modcfunc peek int at
+		return content(at)
 #global

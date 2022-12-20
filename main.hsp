@@ -31,6 +31,6 @@
 	#modcfunc get_length
 		return len
 
-	#modcfunc peek int at
+	#modcfunc get int at
 		return content(at)
 #global

@@ -1,0 +1,27 @@
+#include "./value.hsp"
+
+#ifndef __has__@__list__
+
+#define __has__@__list__
+
+// 基底クラスのような物
+#module __list__ len, content
+  #modinit
+    construct@__list__ thismod
+    return
+
+  #modfunc local construct
+    len = 0
+    return
+
+  #define global newlist(%1)\
+		newmod %1, __list__
+
+	#modcfunc list_length
+		return len
+
+	#modcfunc list_at int at
+		return content(at)
+#global
+
+#endif

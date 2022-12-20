@@ -1,0 +1,29 @@
+#include "./value.hsp"
+
+#ifndef __has__@__stack__
+
+#define __has__@__stack__
+
+#module __stack__ len, content
+	#modinit
+		construct@__list__ thismod
+		return
+
+	#define global newstack(%1)\
+		newmod %1, __stack__
+
+	#modfunc local stack_push var v
+		newmod content, __value__, v
+		len++
+		return
+
+	#define global stack_push(%1, %2) v@__stack__ = %2: stack_push@__stack__ %1, v@__stack__
+
+	#modcfunc stack_pop local res
+		len--
+		res = get@__value__(content(len))
+		delmod content(len)
+		return res
+#global
+
+#endif

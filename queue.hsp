@@ -1,0 +1,34 @@
+#include "./value.hsp"
+
+#ifndef __has__@__queue__
+
+#define __has__@__queue__
+
+#module __queue__ len, content
+	#modinit
+		construct@__list__ thismod
+		return
+
+	#define global newqueue(%1)\
+		newmod %1, __queue__
+
+	#modfunc local queue_add var v
+		newmod content, __value__, v
+		len++
+		return
+
+	#define global queue_add(%1, %2) v@__queue__ = %2: queue_add@__queue__ %1, v@__queue__
+
+	#modcfunc queue_remove local res, local _
+		res = get@__value__(content(0))
+    len--
+    repeat len, 1
+      _ = get@__value__(content(cnt))
+      delmod content(cnt - 1)
+      newmod content, __value__, _
+    loop
+    delmod content(len)
+		return res
+#global
+
+#endif

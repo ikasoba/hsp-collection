@@ -1,0 +1,23 @@
+#ifndef __has__@__value__
+
+#define __has__@__value__
+
+// 値のラッパー
+#module __value__ value
+	#modinit var v
+    construct@__value__ thismod
+		return
+
+  #modfunc local construct var v
+    value = v
+    return
+
+	#modcfunc local get
+		return value
+
+  #modfunc local set var v
+		value = v
+    return
+#global
+
+#endif

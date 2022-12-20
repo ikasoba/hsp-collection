@@ -1,0 +1,33 @@
+#module __stack_value__ value
+	#modinit var v
+		value = v
+		return
+
+	#modcfunc local get
+		return value
+#global
+
+#module __stack__ len, content
+	#modinit
+		len = 0
+		return
+
+	#define global newstack(%1)\
+		newmod %1, __stack__
+
+	#modfunc local push var v
+		newmod content, __stack_value__, v
+		len++
+		return
+
+	#define global push(%1, %2) v@__stack__ = %2: push@__stack__ %1, v@__stack__
+
+	#modcfunc pop local res
+		len--
+		res = get@__stack_value__(content(len))
+		delmod content(len)
+		return res
+
+	#modcfunc local get_length
+		return len
+#global
